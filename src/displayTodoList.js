@@ -1,8 +1,11 @@
 import displayTodo from "./displayTodo.js";
+import { clearDOM } from "./DOMmanipulation.js";
 
 export default function displayTodoList(todoList) {
 
-    console.clear();
-    todoList.forEach((todoItem) => displayTodo(todoItem));
+    clearDOM();
+    if (todoList) {
+        todoList.forEach((todoItem, index) => displayTodo(todoItem, index));
+    }
 
 }

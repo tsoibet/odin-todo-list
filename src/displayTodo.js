@@ -1,7 +1,7 @@
-export default function displayTodo(todoItem) {
+import { todoItemDOM } from "./DOMmanipulation";
 
-    for (let property in todoItem) {
-        console.log(`${property} : ${todoItem[property]}`);
-    }
+export default function displayTodo(todoItem, index) {
+
+    todoItemDOM(todoItem, index);
 
 }
