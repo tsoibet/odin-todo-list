@@ -1,3 +1,5 @@
+import operateTodo from "./operateTodo";
+
 export default function homepageDOM() {
 
     const body = document.querySelector("body");
@@ -49,6 +51,90 @@ export default function homepageDOM() {
 export function clearDOM() {
     const todoItems = document.querySelector(".todoItems");
     todoItems.textContent = "";
+}
+
+export function addTodoDOM() {
+
+    const todoItems = document.querySelector(".todoItems");
+
+    const addTodoForm = document.createElement("form");
+    addTodoForm.name = "addTodoForm";
+    addTodoForm.onsubmit = () => operateTodo("add");
+
+    const addTodo = document.createElement("div");
+    addTodo.classList.add('todoItem');
+    addTodo.id = generateId("add");
+    addTodoForm.appendChild(addTodo);
+
+    todoItems.appendChild(addTodoForm);
+
+    todoCompleteButtonDOM("add");
+
+    const details = document.createElement("div");
+    details.classList.add("details");
+    const detailsLeft = document.createElement("div");
+    detailsLeft.classList.add("left");
+    details.appendChild(detailsLeft);
+    const detailsRight = document.createElement("div");
+    detailsRight.classList.add("right");
+    details.appendChild(detailsRight);
+    addTodo.appendChild(details);
+
+    todoDeleteButtonDOM("add");
+
+    const left = document.querySelector(`#todo-add .left`);
+    const titleInput = document.createElement("input");
+    titleInput.classList.add("title");
+    titleInput.classList.add("input");
+    titleInput.type = "text";
+    titleInput.name = "titleInput";
+    titleInput.id = "titleInput";
+    titleInput.required = true;
+    left.appendChild(titleInput);
+
+    const descriptionInput = document.createElement("input");
+    descriptionInput.classList.add("description");
+    descriptionInput.classList.add("input");
+    descriptionInput.type = "text";
+    descriptionInput.name = "descriptionInput";
+    descriptionInput.id = "descriptionInput";
+    left.appendChild(descriptionInput);
+
+    const otherDetails = document.createElement("div");
+    otherDetails.classList.add("otherDetails");
+
+    const dueDateInput = document.createElement("input");
+    dueDateInput.classList.add("dueDate");
+    dueDateInput.classList.add("input");
+    dueDateInput.type = "date";
+    dueDateInput.name = "dueDateInput";
+    dueDateInput.id = "dueDateInput";
+    otherDetails.appendChild(dueDateInput);
+
+    const projectInput = document.createElement("input");
+    projectInput.classList.add("project");
+    projectInput.classList.add("input");
+    projectInput.type = "text";
+    projectInput.name = "projectInput";
+    projectInput.id = "projectInput";
+    otherDetails.appendChild(projectInput);
+
+    const priorityInput = document.createElement("input");
+    priorityInput.classList.add("priority");
+    priorityInput.classList.add("input");
+    priorityInput.type = "checkbox";
+    priorityInput.name = "priorityInput";
+    priorityInput.id = "priorityInput";
+    otherDetails.appendChild(priorityInput);
+
+    left.appendChild(otherDetails);
+
+    const right = document.querySelector(`#todo-add .right`);
+    const submitButton = document.createElement("input");
+    submitButton.type = "submit";
+    submitButton.value = "Add";
+    right.appendChild(submitButton);
+
 }
 
 export function todoItemDOM(todo, index) {
