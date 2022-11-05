@@ -107,6 +107,13 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-end;
+}
+
+.operationButtons {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.5rem;
 }
 
 .project {
@@ -119,8 +126,7 @@ ul {
     cursor: pointer;
 }
 
-.delete {
-    align-self: flex-end;
+.delete, .edit {
     font-size: 1rem;
 }
 

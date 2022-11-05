@@ -87,6 +87,7 @@ export function addTodoDOM(todoList) {
     titleInput.classList.add("title");
     titleInput.classList.add("input");
     titleInput.type = "text";
+    titleInput.autocomplete = "off";
     titleInput.name = "titleInput";
     titleInput.id = "titleInput";
     titleInput.required = true;
@@ -96,6 +97,7 @@ export function addTodoDOM(todoList) {
     descriptionInput.classList.add("description");
     descriptionInput.classList.add("input");
     descriptionInput.type = "text";
+    descriptionInput.autocomplete = "off";
     descriptionInput.name = "descriptionInput";
     descriptionInput.id = "descriptionInput";
     left.appendChild(descriptionInput);
@@ -137,7 +139,90 @@ export function addTodoDOM(todoList) {
 
 }
 
-export function todoItemDOM(todo, index) {
+export function editTodoDOM(id, index, todoList) {
+
+    const details = document.querySelector(`#${id} .details`);
+    details.textContent = "";
+
+    const editTodoForm = document.createElement("form");
+    editTodoForm.name = "editTodoForm";
+    editTodoForm.onsubmit = () => operateTodo("edit", todoList, index);
+
+    const editTodo = document.createElement("div");
+    editTodo.classList.add('todoItem');
+    editTodo.id = generateId("edit");
+    editTodoForm.appendChild(editTodo);
+
+    details.appendChild(editTodoForm);
+
+    const detailsLeft = document.createElement("div");
+    detailsLeft.classList.add("left");
+    editTodoForm.appendChild(detailsLeft);
+    const detailsRight = document.createElement("div");
+    detailsRight.classList.add("right");
+    editTodoForm.appendChild(detailsRight);
+
+    const titleInput = document.createElement("input");
+    titleInput.classList.add("title");
+    titleInput.classList.add("input");
+    titleInput.type = "text";
+    titleInput.autocomplete = "off";
+    titleInput.name = "titleInput";
+    titleInput.id = "titleInput";
+    titleInput.required = true;
+    titleInput.value = todoList.allTodos[index]["title"];
+    detailsLeft.appendChild(titleInput);
+
+    const descriptionInput = document.createElement("input");
+    descriptionInput.classList.add("description");
+    descriptionInput.classList.add("input");
+    descriptionInput.type = "text";
+    descriptionInput.autocomplete = "off";
+    descriptionInput.name = "descriptionInput";
+    descriptionInput.id = "descriptionInput";
+    descriptionInput.value = todoList.allTodos[index]["description"];
+    detailsLeft.appendChild(descriptionInput);
+
+    const otherDetails = document.createElement("div");
+    otherDetails.classList.add("otherDetails");
+
+    const dueDateInput = document.createElement("input");
+    dueDateInput.classList.add("dueDate");
+    dueDateInput.classList.add("input");
+    dueDateInput.type = "date";
+    dueDateInput.name = "dueDateInput";
+    dueDateInput.id = "dueDateInput";
+    dueDateInput.value = todoList.allTodos[index]["dueDate"];
+    otherDetails.appendChild(dueDateInput);
+
+    const projectInput = document.createElement("input");
+    projectInput.classList.add("project");
+    projectInput.classList.add("input");
+    projectInput.type = "text";
+    projectInput.name = "projectInput";
+    projectInput.id = "projectInput";
+    projectInput.value = todoList.allTodos[index]["project"];
+    otherDetails.appendChild(projectInput);
+
+    const priorityInput = document.createElement("input");
+    priorityInput.classList.add("priority");
+    priorityInput.classList.add("input");
+    priorityInput.type = "checkbox";
+    priorityInput.name = "priorityInput";
+    priorityInput.id = "priorityInput";
+    priorityInput.checked = todoList.allTodos[index]["priority"];
+    otherDetails.appendChild(priorityInput);
+
+    detailsLeft.appendChild(otherDetails);
+
+    const submitButton = document.createElement("input");
+    submitButton.type = "submit";
+    submitButton.value = "Edit";
+    detailsRight.appendChild(submitButton);
+
+}
+
+export function todoItemDOM(todo, index, todoList) {
 
     const todoItems = document.querySelector(".todoItems");
     const todoItem = document.createElement("div");
@@ -154,10 +239,14 @@ export function todoItemDOM(todo, index) {
     details.appendChild(detailsLeft);
     const detailsRight = document.createElement("div");
     detailsRight.classList.add("right");
+    const operationButtons = document.createElement("div");
+    operationButtons.classList.add("operationButtons");
+    detailsRight.appendChild(operationButtons);
     details.appendChild(detailsRight);
     todoItem.appendChild(details);
 
-    todoDeleteButtonDOM(todoItem.id);
+    todoEditButtonDOM(todoItem.id, index, todoList);
+    todoDeleteButtonDOM(todoItem.id, index, todoList);
 
     for (let property in todo) {
         todoPropertyDOM(index, trimPropertyName(property), todo[property]);
@@ -204,14 +293,38 @@ function todoPropertyDOM(index, propertyName, propertyValue) {
 
 }
 
-function todoDeleteButtonDOM(id){
+function todoEditButtonDOM(id, index = "NA", todoList = {}){
 
-    const parent = document.querySelector(`#${id} .right`);
+    const parent = document.querySelector(`#${id} .operationButtons`);
+    const editButton = document.createElement("div");
+    editButton.classList.add("button");
+    editButton.classList.add("edit");
+    editButton.textContent = "E";
+    if (!isNaN(index)) {
+        editButton.addEventListener("click", function() {
+            editTodoDOM(id, index, todoList);
+        });
+    }
+    parent.appendChild(editButton);
+
+}
+
+function todoDeleteButtonDOM(id, index = "NA", todoList = {}){
+
     const deleteButton = document.createElement("div");
     deleteButton.classList.add("button");
     deleteButton.classList.add("delete");
     deleteButton.textContent = "X";
-    parent.appendChild(deleteButton);
+    if (!isNaN(index)) {
+        deleteButton.addEventListener("click", function() {
+            operateTodo("delete", todoList, index);
+        });
+        const parent = document.querySelector(`#${id} .operationButtons`);
+        parent.appendChild(deleteButton);
+    } else {
+        const parent = document.querySelector(`#${id} .right`);
+        parent.appendChild(deleteButton);
+    }
 
 }
 

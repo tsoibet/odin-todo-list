@@ -16,12 +16,12 @@ export default class TodoList {
         this.allTodos.push(todoItem);
     }
 
-    delete(todoItem) {
-        this.allTodos.splice(this.allTodos.indexOf(todoItem), 1);
+    delete(index) {
+        this.allTodos.splice(index, 1);
     }
 
-    edit(todoItem, newTodoItem) {
-        this.allTodos[this.allTodos.indexOf(todoItem)] = newTodoItem;
+    edit(index, newTodoItem) {
+        this.allTodos[index] = newTodoItem;
     }
 
 }
