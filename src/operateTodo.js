@@ -1,7 +1,7 @@
 import Todo from "./classTodo.js";
 import displayTodoList from "./displayTodoList";
 
-export default function operateTodo(operate, targetList = defaultList, todo = {}, newTodo = {}) {
+export default function operateTodo(operate, todoList, todo = {}, newTodo = {}) {
     
     if (operate === "add") {
 
@@ -11,19 +11,19 @@ export default function operateTodo(operate, targetList = defaultList, todo = {}
         let projectInput = document.forms["addTodoForm"]["projectInput"].value;
         let priorityInput = document.forms["addTodoForm"]["priorityInput"].checked;
 
-        targetList.add(new Todo(titleInput, descriptionInput, dueDateInput, priorityInput, false, projectInput));
+        todoList.add(new Todo(titleInput, descriptionInput, dueDateInput, priorityInput, false, projectInput));
 
     } else if (operate === "delete") {
 
-        targetList.delete(todo);
+        todoList.delete(todo);
 
     } else if (operate === "edit") {
 
-        targetList.edit(todo, newTodo);
+        todoList.edit(todo, newTodo);
 
     }
 
-    displayTodoList(targetList.allTodos);
+    displayTodoList(todoList);
     return false;
 
 }

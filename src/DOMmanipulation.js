@@ -53,13 +53,13 @@ export function clearDOM() {
     todoItems.textContent = "";
 }
 
-export function addTodoDOM() {
+export function addTodoDOM(todoList) {
 
     const todoItems = document.querySelector(".todoItems");
 
     const addTodoForm = document.createElement("form");
     addTodoForm.name = "addTodoForm";
-    addTodoForm.onsubmit = () => operateTodo("add");
+    addTodoForm.onsubmit = () => operateTodo("add", todoList);
 
     const addTodo = document.createElement("div");
     addTodo.classList.add('todoItem');
