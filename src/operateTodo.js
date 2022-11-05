@@ -1,6 +1,5 @@
 import Todo from "./classTodo.js";
 import displayTodoList from "./displayTodoList";
-import { defaultList } from "./pageLoad.js";
 
 export default function operateTodo(operate, targetList = defaultList, todo = {}, newTodo = {}) {
     

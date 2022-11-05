@@ -68,7 +68,7 @@ export function addTodoDOM() {
 
     todoItems.appendChild(addTodoForm);
 
-    todoCompleteButtonDOM("add");
+    todoCompleteButtonDOM(addTodo.id);
 
     const details = document.createElement("div");
     details.classList.add("details");
@@ -80,7 +80,7 @@ export function addTodoDOM() {
     details.appendChild(detailsRight);
     addTodo.appendChild(details);
 
-    todoDeleteButtonDOM("add");
+    todoDeleteButtonDOM(addTodo.id);
 
     const left = document.querySelector(`#todo-add .left`);
     const titleInput = document.createElement("input");
@@ -145,7 +145,7 @@ export function todoItemDOM(todo, index) {
     todoItem.id = generateId(index);
     todoItems.appendChild(todoItem);
 
-    todoCompleteButtonDOM(index);
+    todoCompleteButtonDOM(todoItem.id);
 
     const details = document.createElement("div");
     details.classList.add("details");
@@ -157,7 +157,7 @@ export function todoItemDOM(todo, index) {
     details.appendChild(detailsRight);
     todoItem.appendChild(details);
 
-    todoDeleteButtonDOM(index);
+    todoDeleteButtonDOM(todoItem.id);
 
     for (let property in todo) {
         todoPropertyDOM(index, trimPropertyName(property), todo[property]);
@@ -165,9 +165,9 @@ export function todoItemDOM(todo, index) {
 
 }
 
-function todoCompleteButtonDOM(index){
+function todoCompleteButtonDOM(id){
 
-    const parent = document.querySelector(`#${generateId(index)}`);
+    const parent = document.querySelector(`#${id}`);
     const completeButton = document.createElement("div");
     completeButton.classList.add("button");
     completeButton.classList.add("complete");
@@ -204,9 +204,9 @@ function todoPropertyDOM(index, propertyName, propertyValue) {
 
 }
 
-function todoDeleteButtonDOM(index){
+function todoDeleteButtonDOM(id){
 
-    const parent = document.querySelector(`#${generateId(index)} .right`);
+    const parent = document.querySelector(`#${id} .right`);
     const deleteButton = document.createElement("div");
     deleteButton.classList.add("button");
     deleteButton.classList.add("delete");

@@ -1,5 +1,7 @@
+import TodoList from "./classTodoList.js";
 import pageLoad from "./pageLoad.js";
 import './styles.css'
 
-pageLoad();
+let AllTodoList = new TodoList([]);
+pageLoad(AllTodoList);
 
