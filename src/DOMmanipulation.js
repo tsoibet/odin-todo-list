@@ -65,8 +65,10 @@ export function addTodoDOM(todoList) {
     addTodo.classList.add('todoItem');
     addTodo.id = generateId("add");
     addTodoForm.appendChild(addTodo);
-
     todoItems.appendChild(addTodoForm);
+    const wrapper = document.createElement("div");
+    wrapper.classList.add('wrapper');
+    addTodo.appendChild(wrapper);
 
     todoCompleteButtonDOM(addTodo.id);
 
@@ -78,7 +80,7 @@ export function addTodoDOM(todoList) {
     const detailsRight = document.createElement("div");
     detailsRight.classList.add("right");
     details.appendChild(detailsRight);
-    addTodo.appendChild(details);
+    wrapper.appendChild(details);
 
     todoDeleteButtonDOM(addTodo.id);
 
@@ -141,26 +143,25 @@ export function addTodoDOM(todoList) {
 
 export function editTodoDOM(id, index, todoList) {
 
-    const details = document.querySelector(`#${id} .details`);
-    details.textContent = "";
+    const todoItem = document.querySelector(`#${id}`);
+    todoItem.textContent = "";
 
     const editTodoForm = document.createElement("form");
     editTodoForm.name = "editTodoForm";
     editTodoForm.onsubmit = () => operateTodo("edit", todoList, index);
+    todoItem.appendChild(editTodoForm);
 
-    const editTodo = document.createElement("div");
-    editTodo.classList.add('todoItem');
-    editTodo.id = generateId("edit");
-    editTodoForm.appendChild(editTodo);
+    const completeButton = document.createElement("div");
+    completeButton.classList.add("button");
+    completeButton.classList.add("complete");
+    editTodoForm.appendChild(completeButton);
 
-    details.appendChild(editTodoForm);
+    const details = document.createElement("div");
+    details.classList.add("details");
 
     const detailsLeft = document.createElement("div");
     detailsLeft.classList.add("left");
-    editTodoForm.appendChild(detailsLeft);
-    const detailsRight = document.createElement("div");
-    detailsRight.classList.add("right");
-    editTodoForm.appendChild(detailsRight);
+    details.appendChild(detailsLeft);
 
     const titleInput = document.createElement("input");
     titleInput.classList.add("title");
@@ -215,10 +216,14 @@ export function editTodoDOM(id, index, todoList) {
 
     detailsLeft.appendChild(otherDetails);
 
+    const detailsRight = document.createElement("div");
+    detailsRight.classList.add("right");
     const submitButton = document.createElement("input");
     submitButton.type = "submit";
     submitButton.value = "Edit";
     detailsRight.appendChild(submitButton);
+    details.appendChild(detailsRight);
+    editTodoForm.appendChild(details);
 
 }
 
@@ -229,6 +234,9 @@ export function todoItemDOM(todo, index, todoList) {
     todoItem.classList.add('todoItem');
     todoItem.id = generateId(index);
     todoItems.appendChild(todoItem);
+    const wrapper = document.createElement("div");
+    wrapper.classList.add('wrapper');
+    todoItem.appendChild(wrapper);
 
     todoCompleteButtonDOM(todoItem.id);
 
@@ -243,7 +251,7 @@ export function todoItemDOM(todo, index, todoList) {
     operationButtons.classList.add("operationButtons");
     detailsRight.appendChild(operationButtons);
     details.appendChild(detailsRight);
-    todoItem.appendChild(details);
+    wrapper.appendChild(details);
 
     todoEditButtonDOM(todoItem.id, index, todoList);
     todoDeleteButtonDOM(todoItem.id, index, todoList);
@@ -256,7 +264,7 @@ export function todoItemDOM(todo, index, todoList) {
 
 function todoCompleteButtonDOM(id){
 
-    const parent = document.querySelector(`#${id}`);
+    const parent = document.querySelector(`#${id} div`);
     const completeButton = document.createElement("div");
     completeButton.classList.add("button");
     completeButton.classList.add("complete");

@@ -2,7 +2,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-size: calc(10px + 0.4vh + 0.4vw);
+    font-size: calc(8px + 0.4vh + 0.4vw);
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -57,7 +57,7 @@ ul {
     gap: 1rem;
 }
 
-.todoItem {
+.todoItem .wrapper, .todoItem form {
     border-bottom: solid 0.1rem lightgrey;
     padding: 0 0 0 1rem;
 
@@ -73,6 +73,7 @@ ul {
     display: grid;
     grid-template-columns: 1fr auto;
     place-items: stretch;
+    gap: 1rem;
 }
 
 .left {
@@ -121,6 +122,10 @@ ul {
     color: grey;
 }
 
+input[type=submit] {
+    padding: 0.2rem 0.4rem;
+}
+
 .button {
     font-size: 2rem;
     cursor: pointer;
@@ -128,14 +133,18 @@ ul {
 
 .delete, .edit {
     font-size: 1rem;
+    border: black 0.1rem solid;
+    border-radius: 1rem;
+    padding: 0.2rem 0.4rem;
 }
 
 .complete::before {
     content: "○";
 }
 
-.completed, .completed .description, .completed .dueDate, .completed .project {
+.completed, .completed .description, .completed .dueDate, .completed .project, .completed .delete, .completed .edit {
     color: lightgrey;
+    border-color: lightgrey;
 }
 
 .completed .complete::before {
