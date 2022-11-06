@@ -25,7 +25,7 @@ export default function operateTodo(operation, todoList, index = "") {
         let projectInput = document.forms["editTodoForm"]["projectInput"].value;
         let priorityInput = document.forms["editTodoForm"]["priorityInput"].checked;
 
-        todoList.edit(index, new Todo(titleInput, descriptionInput, dueDateInput, priorityInput, false, projectInput));
+        todoList.edit(index, new Todo(titleInput, descriptionInput, dueDateInput, priorityInput, todoList.allTodos[index]["status"], projectInput));
 
     }
 
