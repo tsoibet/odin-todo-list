@@ -27,6 +27,10 @@ export default function operateTodo(operation, todoList, index = "") {
 
         todoList.edit(index, new Todo(titleInput, descriptionInput, dueDateInput, priorityInput, todoList.allTodos[index]["status"], projectInput));
 
+    } else if (operation === "changeStatus") {
+
+        todoList.edit(index, new Todo(todoList.allTodos[index]["title"], todoList.allTodos[index]["description"], todoList.allTodos[index]["dueDate"], todoList.allTodos[index]["priority"], !(todoList.allTodos[index]["status"]), todoList.allTodos[index]["project"]));
+
     }
 
     displayTodoList(todoList);

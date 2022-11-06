@@ -238,7 +238,7 @@ export function todoItemDOM(todo, index, todoList) {
     wrapper.classList.add('wrapper');
     todoItem.appendChild(wrapper);
 
-    todoCompleteButtonDOM(todoItem.id);
+    todoCompleteButtonDOM(todoItem.id, index, todoList);
 
     const details = document.createElement("div");
     details.classList.add("details");
@@ -262,12 +262,17 @@ export function todoItemDOM(todo, index, todoList) {
 
 }
 
-function todoCompleteButtonDOM(id){
+function todoCompleteButtonDOM(id, index = "NA", todoList = {}){
 
     const parent = document.querySelector(`#${id} div`);
     const completeButton = document.createElement("div");
     completeButton.classList.add("button");
     completeButton.classList.add("complete");
+    if (!isNaN(index)) {
+        completeButton.addEventListener("click", function(){
+            operateTodo("changeStatus", todoList, index);
+        });
+    }
     parent.appendChild(completeButton);
 
 }
