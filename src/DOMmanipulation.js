@@ -285,7 +285,7 @@ export function todoItemDOM(todo, index, todoList, projectList) {
     wrapper.appendChild(details);
 
     todoEditButtonDOM(todoItem.id, index, todoList, projectList);
-    todoDeleteButtonDOM(todoItem.id, index, todoList);
+    todoDeleteButtonDOM(todoItem.id, index, todoList, projectList);
 
     for (let property in todo) {
         todoPropertyDOM(index, trimPropertyName(property), todo[property]);
@@ -337,7 +337,7 @@ function todoPropertyDOM(index, propertyName, propertyValue) {
 
 }
 
-function todoEditButtonDOM(id, index = "NA", todoList = {}, projectList = {}){
+function todoEditButtonDOM(id, index = "NA", todoList = {}, projectList = []){
 
     const parent = document.querySelector(`#${id} .operationButtons`);
     const editButton = document.createElement("button");
@@ -353,7 +353,7 @@ function todoEditButtonDOM(id, index = "NA", todoList = {}, projectList = {}){
 
 }
 
-function todoDeleteButtonDOM(id, index = "NA", todoList = {}){
+function todoDeleteButtonDOM(id, index = "NA", todoList = {}, projectList = []){
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("button");
