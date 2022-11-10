@@ -29,6 +29,10 @@
     padding: 1.5rem;
 }
 
+.sidebar li {
+    cursor: pointer;
+}
+
 ul {
     list-style: none;
 

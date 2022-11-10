@@ -1,6 +1,7 @@
+import displayTodoList from "./displayTodoList";
 import operateTodo from "./operateTodo";
 
-export default function homepageDOM(projectList) {
+export default function homepageDOM(todoList, projectList) {
 
     const body = document.querySelector("body");
 
@@ -21,11 +22,17 @@ export default function homepageDOM(projectList) {
     const ul = document.createElement("ul");
     const allTodos = document.createElement("li");
     allTodos.textContent = "All";
+    allTodos.addEventListener("click", function(){
+        displayTodoList(todoList, projectList);
+    });
     ul.appendChild(allTodos);
 
     for (let item of projectList.allProjects) {
         const project = document.createElement("li");
         project.textContent = item;
+        project.addEventListener("click", function(){
+            displayTodoList(todoList, projectList, item);
+        });
         ul.appendChild(project);
     }
 
@@ -43,7 +50,7 @@ export default function homepageDOM(projectList) {
     content.classList.add('content');
     const projectTitle = document.createElement("div");
     projectTitle.classList.add('projectTitle');
-    projectTitle.textContent = "All";
+    projectTitle.id = "projectTitle";
     content.appendChild(projectTitle);
     const todoItems = document.createElement("div");
     todoItems.classList.add('todoItems');
@@ -53,6 +60,11 @@ export default function homepageDOM(projectList) {
     container.appendChild(main);
     body.appendChild(container);
 
+}
+
+export function projectTitleDOM(project) {
+    const projectTitle = document.querySelector("#projectTitle");
+    projectTitle.textContent = project;
 }
 
 export function clearDOM() {

@@ -4,7 +4,7 @@ import homepageDOM from "./DOMmanipulation.js";
 
 export default function pageLoad(todoList, projectList) {
 
-    homepageDOM(projectList);
+    homepageDOM(todoList, projectList);
     addSamples(todoList, projectList);
     displayTodoList(todoList, projectList);
 
