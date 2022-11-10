@@ -142,7 +142,7 @@ input[type=submit] {
     content: "○";
 }
 
-.completed, .completed .description, .completed .dueDate, .completed .project, .completed .delete, .completed .edit {
+.completed, .completed .title, .completed .description, .completed .dueDate, .completed .project, .completed .delete, .completed .edit {
     color: lightgrey;
     border-color: lightgrey;
 }

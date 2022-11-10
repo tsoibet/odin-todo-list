@@ -1,7 +1,7 @@
 import Todo from "./classTodo.js";
 import displayTodoList from "./displayTodoList";
 
-export default function operateTodo(operation, todoList, index = "") {
+export default function operateTodo(operation, todoList, projectList, index = "") {
     
     if (operation === "add") {
 
@@ -33,7 +33,7 @@ export default function operateTodo(operation, todoList, index = "") {
 
     }
 
-    displayTodoList(todoList);
+    displayTodoList(todoList, projectList);
     return false;
 
 }
