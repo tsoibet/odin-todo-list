@@ -63,7 +63,7 @@ ul {
 
 .todoItem .wrapper, .todoItem form {
     border-bottom: solid 0.1rem lightgrey;
-    padding: 0 0 0 1rem;
+    padding: 0 0 0.2rem 1rem;
 
     display: grid;
     grid-template-columns: auto 1fr;
@@ -83,10 +83,12 @@ ul {
 .left {
     display: grid;
     grid-template-rows: auto;
+    gap: 0.2rem;
 }
 
 .title {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    color: black;
 }
 
 .important .title {
@@ -106,6 +108,7 @@ ul {
 .dueDate {
     font-size: 0.9rem;
     color: green;
+    padding: 0.1rem 0;
 }
 
 .right {
@@ -126,19 +129,28 @@ ul {
     color: grey;
 }
 
-input[type=submit] {
-    padding: 0.2rem 0.4rem;
+input {
+    border: none;
 }
 
-.button {
-    font-size: 2rem;
+input:focus {
+    outline: none;
+}
+
+.project.input {
+    padding: 0.1rem;
+}
+
+.button, input[type=submit] {
     cursor: pointer;
 }
 
-.delete, .edit {
-    font-size: 1rem;
-    border: black 0.1rem solid;
-    border-radius: 1rem;
+.complete {
+    font-size: 2rem;
+}
+
+.delete, .edit, input[type=submit] {
+    border: none;
     padding: 0.2rem 0.4rem;
 }
 
@@ -158,4 +170,5 @@ input[type=submit] {
 .otherDetails {
     display: flex;
     flex-direction: row;
+    gap: 1rem;
 }

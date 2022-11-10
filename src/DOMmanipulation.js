@@ -111,6 +111,7 @@ export function addTodoDOM(todoList, projectList) {
     titleInput.autocomplete = "off";
     titleInput.name = "titleInput";
     titleInput.id = "titleInput";
+    titleInput.placeholder = "Title";
     titleInput.required = true;
     left.appendChild(titleInput);
 
@@ -121,6 +122,7 @@ export function addTodoDOM(todoList, projectList) {
     descriptionInput.autocomplete = "off";
     descriptionInput.name = "descriptionInput";
     descriptionInput.id = "descriptionInput";
+    descriptionInput.placeholder = "Notes";
     left.appendChild(descriptionInput);
 
     const otherDetails = document.createElement("div");
@@ -338,7 +340,7 @@ function todoPropertyDOM(index, propertyName, propertyValue) {
 function todoEditButtonDOM(id, index = "NA", todoList = {}, projectList = {}){
 
     const parent = document.querySelector(`#${id} .operationButtons`);
-    const editButton = document.createElement("div");
+    const editButton = document.createElement("button");
     editButton.classList.add("button");
     editButton.classList.add("edit");
     editButton.textContent = "E";
@@ -353,7 +355,7 @@ function todoEditButtonDOM(id, index = "NA", todoList = {}, projectList = {}){
 
 function todoDeleteButtonDOM(id, index = "NA", todoList = {}){
 
-    const deleteButton = document.createElement("div");
+    const deleteButton = document.createElement("button");
     deleteButton.classList.add("button");
     deleteButton.classList.add("delete");
     deleteButton.textContent = "X";
@@ -364,6 +366,7 @@ function todoDeleteButtonDOM(id, index = "NA", todoList = {}){
         const parent = document.querySelector(`#${id} .operationButtons`);
         parent.appendChild(deleteButton);
     } else {
+        deleteButton.type = "reset";
         const parent = document.querySelector(`#${id} .right`);
         parent.appendChild(deleteButton);
     }
