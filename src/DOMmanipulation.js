@@ -62,9 +62,15 @@ export default function homepageDOM(todoList, projectList) {
     const today = document.createElement("li");
     today.classList.add("today");
     today.textContent = "Today";
+    today.addEventListener("click", function(){
+        displayTodoList(todoList, projectList, "Today");
+    });
     ul.appendChild(today);
     const thisWeek = document.createElement("li");
     thisWeek.textContent = "This week";
+    thisWeek.addEventListener("click", function(){
+        displayTodoList(todoList, projectList, "This week");
+    });
     ul.appendChild(thisWeek);
     nav.appendChild(ul);
     sidebar.appendChild(nav);
