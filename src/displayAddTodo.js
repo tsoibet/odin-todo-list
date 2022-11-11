@@ -1,5 +1,5 @@
 import { addTodoDOM } from "./DOMmanipulation";
 
-export default function displayAddTodo(todoList, projectList) {
-    addTodoDOM(todoList, projectList);
+export default function displayAddTodo(todoList, projectList, projectPage) {
+    addTodoDOM(todoList, projectList, projectPage);
 }

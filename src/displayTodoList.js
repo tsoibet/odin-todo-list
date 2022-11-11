@@ -6,15 +6,15 @@ import { projectTitleDOM } from "./DOMmanipulation.js";
 export default function displayTodoList(todoList, projectList, projectToShow = "All") {
 
     clearDOM();
-    displayAddTodo(todoList, projectList);
+    displayAddTodo(todoList, projectList, projectToShow);
     if (todoList.allTodos) {
         projectTitleDOM(projectToShow);
         if (projectToShow == "All") {
-            todoList.allTodos.forEach((todoItem, index) => todoItemDOM(todoItem, index, todoList, projectList));
+            todoList.allTodos.forEach((todoItem, index) => todoItemDOM(todoItem, index, todoList, projectList, projectToShow));
         } else {
             todoList.allTodos.forEach((todoItem, index) => {     
                 if (todoItem.project === projectToShow) {
-                    todoItemDOM(todoItem, index, todoList, projectList);
+                    todoItemDOM(todoItem, index, todoList, projectList, projectToShow);
                 }
             });
         }

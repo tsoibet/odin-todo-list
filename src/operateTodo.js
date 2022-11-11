@@ -1,7 +1,7 @@
 import Todo from "./classTodo.js";
 import displayTodoList from "./displayTodoList";
 
-export default function operateTodo(operation, todoList, projectList, index = "") {
+export default function operateTodo(operation, todoList, projectList, index = "", projectPage = "All") {
     
     if (operation === "add") {
 
@@ -12,6 +12,10 @@ export default function operateTodo(operation, todoList, projectList, index = ""
         let priorityInput = document.forms["addTodoForm"]["priorityInput"].checked;
 
         todoList.add(new Todo(titleInput, descriptionInput, dueDateInput, priorityInput, false, projectInput));
+
+        if (projectPage != "All") {
+            projectPage = projectInput;
+        }
 
     } else if (operation === "delete") {
 
@@ -33,7 +37,7 @@ export default function operateTodo(operation, todoList, projectList, index = ""
 
     }
 
-    displayTodoList(todoList, projectList);
+    displayTodoList(todoList, projectList, projectPage);
     return false;
 
 }

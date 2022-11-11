@@ -31,6 +31,7 @@ export default function homepageDOM(todoList, projectList) {
         const project = document.createElement("li");
         project.textContent = item;
         project.addEventListener("click", function(){
+            console.log(item, " entering displayTodoList...");
             displayTodoList(todoList, projectList, item);
         });
         ul.appendChild(project);
@@ -72,13 +73,13 @@ export function clearDOM() {
     todoItems.textContent = "";
 }
 
-export function addTodoDOM(todoList, projectList) {
+export function addTodoDOM(todoList, projectList, projectPage) {
 
     const todoItems = document.querySelector(".todoItems");
 
     const addTodoForm = document.createElement("form");
     addTodoForm.name = "addTodoForm";
-    addTodoForm.onsubmit = () => operateTodo("add", todoList, projectList);
+    addTodoForm.onsubmit = () => operateTodo("add", todoList, projectList, "NA", projectPage);
 
     const addTodo = document.createElement("div");
     addTodo.classList.add('todoItem');
@@ -145,6 +146,9 @@ export function addTodoDOM(todoList, projectList) {
         const option = document.createElement("option");
         option.value = project;
         option.textContent = project;
+        if (projectPage === project) {
+            option.selected = true;
+        }
         projectInput.appendChild(option);
     }
     otherDetails.appendChild(projectInput);
@@ -167,14 +171,14 @@ export function addTodoDOM(todoList, projectList) {
 
 }
 
-export function editTodoDOM(id, index, todoList, projectList) {
+export function editTodoDOM(id, index, todoList, projectList, projectPage) {
 
     const todoItem = document.querySelector(`#${id}`);
     todoItem.textContent = "";
 
     const editTodoForm = document.createElement("form");
     editTodoForm.name = "editTodoForm";
-    editTodoForm.onsubmit = () => operateTodo("edit", todoList, projectList, index);
+    editTodoForm.onsubmit = () => operateTodo("edit", todoList, projectList, index, projectPage);
     todoItem.appendChild(editTodoForm);
 
     const completeButton = document.createElement("div");
@@ -258,7 +262,7 @@ export function editTodoDOM(id, index, todoList, projectList) {
 
 }
 
-export function todoItemDOM(todo, index, todoList, projectList) {
+export function todoItemDOM(todo, index, todoList, projectList, projectPage) {
 
     const todoItems = document.querySelector(".todoItems");
     const todoItem = document.createElement("div");
@@ -269,7 +273,7 @@ export function todoItemDOM(todo, index, todoList, projectList) {
     wrapper.classList.add('wrapper');
     todoItem.appendChild(wrapper);
 
-    todoCompleteButtonDOM(todoItem.id, index, todoList, projectList);
+    todoCompleteButtonDOM(todoItem.id, index, todoList, projectList, projectPage);
 
     const details = document.createElement("div");
     details.classList.add("details");
@@ -284,8 +288,8 @@ export function todoItemDOM(todo, index, todoList, projectList) {
     details.appendChild(detailsRight);
     wrapper.appendChild(details);
 
-    todoEditButtonDOM(todoItem.id, index, todoList, projectList);
-    todoDeleteButtonDOM(todoItem.id, index, todoList, projectList);
+    todoEditButtonDOM(todoItem.id, index, todoList, projectList, projectPage);
+    todoDeleteButtonDOM(todoItem.id, index, todoList, projectList, projectPage);
 
     for (let property in todo) {
         todoPropertyDOM(index, trimPropertyName(property), todo[property]);
@@ -293,7 +297,7 @@ export function todoItemDOM(todo, index, todoList, projectList) {
 
 }
 
-function todoCompleteButtonDOM(id, index = "NA", todoList = {}, projectList = []){
+function todoCompleteButtonDOM(id, index = "NA", todoList = {}, projectList = [], projectPage = "All"){
 
     const parent = document.querySelector(`#${id} div`);
     const completeButton = document.createElement("div");
@@ -301,7 +305,7 @@ function todoCompleteButtonDOM(id, index = "NA", todoList = {}, projectList = []
     completeButton.classList.add("complete");
     if (!isNaN(index)) {
         completeButton.addEventListener("click", function(){
-            operateTodo("changeStatus", todoList, projectList, index);
+            operateTodo("changeStatus", todoList, projectList, index, projectPage);
         });
     }
     parent.appendChild(completeButton);
@@ -337,7 +341,7 @@ function todoPropertyDOM(index, propertyName, propertyValue) {
 
 }
 
-function todoEditButtonDOM(id, index = "NA", todoList = {}, projectList = []){
+function todoEditButtonDOM(id, index = "NA", todoList = {}, projectList = [], projectPage = "All"){
 
     const parent = document.querySelector(`#${id} .operationButtons`);
     const editButton = document.createElement("button");
@@ -346,14 +350,14 @@ function todoEditButtonDOM(id, index = "NA", todoList = {}, projectList = []){
     editButton.textContent = "E";
     if (!isNaN(index)) {
         editButton.addEventListener("click", function() {
-            editTodoDOM(id, index, todoList, projectList);
+            editTodoDOM(id, index, todoList, projectList, projectPage);
         });
     }
     parent.appendChild(editButton);
 
 }
 
-function todoDeleteButtonDOM(id, index = "NA", todoList = {}, projectList = []){
+function todoDeleteButtonDOM(id, index = "NA", todoList = {}, projectList = [], projectPage){
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("button");
@@ -361,7 +365,7 @@ function todoDeleteButtonDOM(id, index = "NA", todoList = {}, projectList = []){
     deleteButton.textContent = "X";
     if (!isNaN(index)) {
         deleteButton.addEventListener("click", function() {
-            operateTodo("delete", todoList, projectList, index);
+            operateTodo("delete", todoList, projectList, index, projectPage);
         });
         const parent = document.querySelector(`#${id} .operationButtons`);
         parent.appendChild(deleteButton);
