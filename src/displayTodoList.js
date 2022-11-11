@@ -1,4 +1,4 @@
-import { addWeeks, isToday, isWithinInterval} from "date-fns";
+import { addWeeks, isThisMonth, isToday, isWithinInterval} from "date-fns";
 import displayAddTodo from "./displayAddTodo.js";
 import { todoItemDOM } from "./DOMmanipulation.js";
 import { clearDOM } from "./DOMmanipulation.js";
@@ -17,17 +17,23 @@ export default function displayTodoList(todoList, projectList, projectToShow = "
                 todoItemDOM(todoItem, index, todoList, projectList, projectToShow);
             }
         });
-    } else if (projectToShow === "This week") {
+    } else if (projectToShow === "Within a week") {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        const thisWeek = addWeeks(today, 1);
-        thisWeek.setHours(0, 0, 0, 0);
+        const oneWeek = addWeeks(today, 1);
+        oneWeek.setHours(0, 0, 0, 0);
         todoList.allTodos.forEach((todoItem, index) => {   
             const date = new Date(todoItem.dueDate);
             if (isWithinInterval(date, {
                 start: today,
-                end: thisWeek
+                end: oneWeek
             })) {
+                todoItemDOM(todoItem, index, todoList, projectList, projectToShow);
+            }
+        });
+    } else if (projectToShow === "This month") {
+        todoList.allTodos.forEach((todoItem, index) => {    
+            if (isThisMonth(new Date(todoItem.dueDate))) {
                 todoItemDOM(todoItem, index, todoList, projectList, projectToShow);
             }
         });

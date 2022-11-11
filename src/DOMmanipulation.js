@@ -67,11 +67,17 @@ export default function homepageDOM(todoList, projectList) {
     });
     ul.appendChild(today);
     const thisWeek = document.createElement("li");
-    thisWeek.textContent = "This week";
+    thisWeek.textContent = "Within a week";
     thisWeek.addEventListener("click", function(){
-        displayTodoList(todoList, projectList, "This week");
+        displayTodoList(todoList, projectList, "Within a week");
     });
     ul.appendChild(thisWeek);
+    const thisMonth = document.createElement("li");
+    thisMonth.textContent = "This month";
+    thisMonth.addEventListener("click", function(){
+        displayTodoList(todoList, projectList, "This month");
+    });
+    ul.appendChild(thisMonth);
     nav.appendChild(ul);
     sidebar.appendChild(nav);
     main.appendChild(sidebar);
