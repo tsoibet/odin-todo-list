@@ -37,6 +37,15 @@
     content: "・";
 }
 
+.addProject {
+    color: grey;
+}
+
+.addProjectInput {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+}
+
 .today {
     margin-top: 1rem;
 }
@@ -151,15 +160,14 @@ input:focus {
 
 .button, input[type=submit] {
     cursor: pointer;
+    border: none;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.9rem;
 }
 
 .complete {
     font-size: 2rem;
-}
-
-.delete, .edit, input[type=submit] {
-    border: none;
-    padding: 0.2rem 0.4rem;
+    padding: 0;
 }
 
 .complete::before {

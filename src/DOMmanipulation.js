@@ -1,9 +1,11 @@
 import displayTodoList from "./displayTodoList";
+import operateProject from "./operateProject";
 import operateTodo from "./operateTodo";
 
 export default function homepageDOM(todoList, projectList) {
 
     const body = document.querySelector("body");
+    body.textContent = "";
 
     const container = document.createElement("div");
     container.classList.add('container');
@@ -36,6 +38,26 @@ export default function homepageDOM(todoList, projectList) {
         });
         ul.appendChild(project);
     }
+
+    const addProject = document.createElement("li");
+    const addProjectForm = document.createElement("form");
+    addProjectForm.name = "addProjectForm";
+    addProjectForm.onsubmit = () => operateProject("add", projectList, todoList);
+    const addProjectInput = document.createElement("input");
+    addProjectInput.classList.add("input");
+    addProjectInput.classList.add("addProjectInput");
+    addProjectInput.name = "addProjectInput";
+    addProjectInput.placeholder = "NEW PROJECT NAME";
+    addProjectInput.required = true;
+    addProjectInput.autocomplete = "off";
+    const addProjectButton = document.createElement("button");
+    addProjectButton.classList.add("button");
+    addProjectButton.classList.add("addProject");
+    addProjectButton.textContent = "ADD";
+    addProjectForm.appendChild(addProjectInput);
+    addProjectForm.appendChild(addProjectButton);
+    addProject.appendChild(addProjectForm);
+    ul.appendChild(addProject);
 
     const today = document.createElement("li");
     today.classList.add("today");
