@@ -30,14 +30,15 @@ export default function homepageDOM(todoList, projectList) {
     for (let item of projectList.allProjects) {
         const project = document.createElement("li");
         project.textContent = item;
+        project.classList.add("sub");
         project.addEventListener("click", function(){
-            console.log(item, " entering displayTodoList...");
             displayTodoList(todoList, projectList, item);
         });
         ul.appendChild(project);
     }
 
     const today = document.createElement("li");
+    today.classList.add("today");
     today.textContent = "Today";
     ul.appendChild(today);
     const thisWeek = document.createElement("li");
