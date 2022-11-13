@@ -1,3 +1,4 @@
+import { updateStorage } from "./localStorage";
 import pageLoad from "./pageLoad";
 
 export default function operateProject(operation, projectList, todoList) {
@@ -7,6 +8,7 @@ export default function operateProject(operation, projectList, todoList) {
         projectList.add(input);
     }
 
+    updateStorage(todoList, projectList);
     pageLoad(todoList, projectList);
     return false;
 

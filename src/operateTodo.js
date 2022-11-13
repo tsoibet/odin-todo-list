@@ -1,5 +1,6 @@
 import Todo from "./classTodo.js";
 import displayTodoList from "./displayTodoList";
+import { retrieveProjects, retrieveTodos, updateStorage } from "./localStorage.js";
 
 export default function operateTodo(operation, todoList, projectList, index = "", projectPage = "All") {
     
@@ -37,7 +38,9 @@ export default function operateTodo(operation, todoList, projectList, index = ""
 
     }
 
+    updateStorage(todoList, projectList);
     displayTodoList(todoList, projectList, projectPage);
+
     return false;
 
 }
