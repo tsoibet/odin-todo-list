@@ -1,7 +1,7 @@
-import addSamples from "./addSamples.js";
 import ProjectList from "./classProjectList.js";
 import TodoList from "./classTodoList.js";
 import { retrieveTodos, retrieveProjects, updateStorage } from "./localStorage.js";
+import addSamples from "./addSamples.js";
 import pageLoad from "./pageLoad.js";
 import './styles.css'
 

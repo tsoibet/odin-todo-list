@@ -12,11 +12,9 @@ export function retrieveTodos() {
         let instance = Object.assign(new Todo(), item);
         todoInstanceArray.push(instance);
     }
-    console.log("Retrieve todos:", todoInstanceArray);
     return todoInstanceArray;
 }
 
 export function retrieveProjects() {
-    console.log("Retrieve projects:", JSON.parse(localStorage.getItem("projects")));
     return JSON.parse(localStorage.getItem("projects"));
 }
