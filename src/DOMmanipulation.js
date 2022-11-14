@@ -208,6 +208,8 @@ export function addTodoDOM(todoList, projectList, projectPage) {
 
 export function editTodoDOM(id, index, todoList, projectList, projectPage) {
 
+    displayTodoList(todoList, projectList, projectPage);
+
     const todoItem = document.querySelector(`#${id}`);
     todoItem.textContent = "";
 
