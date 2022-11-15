@@ -1,3 +1,4 @@
+import { isPast } from "date-fns";
 import displayTodoList from "./displayTodoList";
 import operateProject from "./operateProject";
 import operateTodo from "./operateTodo";
@@ -50,6 +51,7 @@ export default function homepageDOM(todoList, projectList) {
     addProjectInput.placeholder = "NEW PROJECT NAME";
     addProjectInput.required = true;
     addProjectInput.autocomplete = "off";
+    addProjectInput.maxLength = 15;
     const addProjectButton = document.createElement("button");
     addProjectButton.classList.add("button");
     addProjectButton.classList.add("addProject");
@@ -371,6 +373,9 @@ function todoPropertyDOM(index, propertyName, propertyValue) {
                 const property = document.createElement("div");
                 property.classList.add(propertyName);
                 property.textContent = propertyValue;
+                if (propertyName == "dueDate" && isPast(new Date(propertyValue))) {
+                        property.classList.add("past");
+                }
                 parent.appendChild(property);
             }
         }
